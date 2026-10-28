@@ -1,13 +1,31 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import java.io.IOException;
+import java.util.Properties;
+import java.io.FileInputStream;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        Properties p = new Properties();
+        p.load(new FileInputStream("config.txt"));
+        int nu = Integer.parseInt(p.getProperty("nu"));
+        int base = Integer.parseInt(p.getProperty("base"));
+        int ng = Integer.parseInt(p.getProperty("ng"));
+        int tam1 = Integer.parseInt(p.getProperty("tam1"));
+        int tam2 = Integer.parseInt(p.getProperty("tam2"));
+        int procesadores = Integer.parseInt(p.getProperty("procesadores"));
+        int memoria = Integer.parseInt(p.getProperty("memoria"));
+        int tamPagina = Integer.parseInt(p.getProperty("tamPagina"));
+        int almacenamiento = Integer.parseInt(p.getProperty("almacenamiento"));
+        int tamBloque = Integer.parseInt(p.getProperty("tamBloque"));
+
+
+
+
+
+
+
+
+
+
     }
 }
