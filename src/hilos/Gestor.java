@@ -2,6 +2,7 @@ package hilos;
 
 import buffers.BuzonEntrada;
 import buffers.ContadorMVs;
+import buffers.Solicitud;
 import buffers.ZonaEspera;
 import controladores.ControladorAlmacenamiento;
 import controladores.ControladorMemoria;
@@ -26,4 +27,28 @@ public class Gestor extends Thread{
         this.controladorAlmacenamiento = controladorAlmacenamiento;
         this.contadorMVs = contadorMVs;
     }
+
+    @Override
+    public void run(){
+
+        while(buzonAsignado.getUsuariosActivos() != 0 || !buzonAsignado.vacio()){
+
+            if (zonaAsignada.superaUmbral()){
+
+            }
+
+            Solicitud soli = buzonAsignado.retirarSolicitud();
+
+            if (soli != null){
+                MV mv = new MV(contadorMVs.getIdMVs(), soli.getProcesadoresPedidos(), soli.getMemoriaPedida(), soli.getAlmacenamientoPedido(),zonaAsignada, controladorProcesadores, controladorMemoria, controladorAlmacenamiento);
+                mv.start();
+            }
+            else{
+                Thread.yield();
+            }
+
+        }
+
+    }
+
 }

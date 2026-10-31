@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.io.FileInputStream;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         Properties p = new Properties();
         p.load(new FileInputStream("config.txt"));
@@ -27,9 +27,10 @@ public class Main {
         int almacenamiento = Integer.parseInt(p.getProperty("almacenamiento"));
         int tamBloque = Integer.parseInt(p.getProperty("tamBloque"));
 
-        ContadorMVs contadorMVs = new ContadorMVs(0);
+        int cantMVs = base * nu * (nu+1) / 2;
+        ContadorMVs contadorMVs = new ContadorMVs(0, cantMVs);
         BuzonEntrada buzonEntrada = new BuzonEntrada(nu,tam1);
-        ZonaEspera zonaEspera = new ZonaEspera(tam2);
+        ZonaEspera zonaEspera = new ZonaEspera(tam2, cantMVs);
         ControladorAlmacenamiento controladorAlmacenamiento = new ControladorAlmacenamiento(almacenamiento, tamBloque);
         ControladorMemoria controladorMemoria = new ControladorMemoria(memoria, tamPagina);
         ControladorProcesadores controladorProcesadores = new ControladorProcesadores(procesadores);
@@ -42,13 +43,11 @@ public class Main {
 
         Usuario[] usuarios = new Usuario[nu];
         for (int j = 1; j <= nu; j++){
-            usuarios[j-1] = new Usuario("U-"+j, base * j, buzonEntrada);
+            usuarios[j-1] = new Usuario("U-"+j, base * j, buzonEntrada, procesadores, memoria, almacenamiento);
             usuarios[j-1].start();
         }
 
-        int cantMVs = base * nu * (nu+1) / 2;
-
-
+        contadorMVs.dormirMain();
 
     }
 }

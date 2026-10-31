@@ -4,6 +4,7 @@ public class ControladorMemoria {
 
     private int[] paginas;
     private int tamPag;
+    private int paginasLibres;
 
     public ControladorMemoria(int memoria, int pag) {
 

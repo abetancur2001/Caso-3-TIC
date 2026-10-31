@@ -26,4 +26,26 @@ public class MV extends Thread{
         this.controladorMem = controladorMem;
         this.controladorAlm = controladorAlm;
     }
+
+    @Override
+    public void run(){
+
+        while (true) {
+
+            int i = zonaEspera.getTurno();
+
+            if (controladorAlm.pedirAlm(almacenamientoMV, idMV)) {
+
+            } else {
+                try {
+                    zonaEspera.esperar(i);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
+
+    }
+
 }

@@ -13,4 +13,16 @@ public class Solicitud {
         this.memoriaPedida = memoriaPedida;
         this.almacenamientoPedido = almacenamientoPedido;
     }
+
+    public int getProcesadoresPedidos() {
+        return procesadoresPedidos;
+    }
+
+    public int getMemoriaPedida() {
+        return memoriaPedida;
+    }
+
+    public int getAlmacenamientoPedido() {
+        return almacenamientoPedido;
+    }
 }
