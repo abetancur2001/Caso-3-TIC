@@ -37,12 +37,20 @@ public class Usuario extends Thread{
                 almacenamientoRound = 2;
             }
 
-            Solicitud solicitud = new Solicitud(idUsuario+" - S" + i,procesadoresPedidos, memoriaPedidaRound, almacenamientoRound);
+            String idSolicitud = idUsuario+" - S" + i;
 
-            buzonEntr.addSolicitud(solicitud);
+            System.out.println("["+idUsuario+"]: Creando solicitud " + idSolicitud);
+
+            Solicitud solicitud = new Solicitud(idSolicitud,procesadoresPedidos, memoriaPedidaRound, almacenamientoRound);
+
+            System.out.println("["+idUsuario+"]: Agregando solicitud al buzón");
+
+            buzonEntr.addSolicitud(solicitud, idUsuario);
 
             i++;
         }
+
+        System.out.println("["+idUsuario+"]: Todas las solicitudes fueron hechas");
 
         buzonEntr.terminarUsuario();
 

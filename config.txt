@@ -1,0 +1,10 @@
+nu=2
+base=2
+ng=2
+tam1=2
+tam2=1
+procesadores=4
+memoria=4
+tamPagina=4
+almacenamiento=8
+tamBloque=4

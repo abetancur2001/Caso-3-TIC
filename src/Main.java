@@ -49,5 +49,32 @@ public class Main {
 
         contadorMVs.dormirMain();
 
+        if (buzonEntrada.vacio()){
+            if (zonaEspera.terminarZona()){
+                if (controladorAlmacenamiento.terminarControladorAlm()){
+                    if (controladorMemoria.terminarControladorMem()){
+                        if (controladorProcesadores.terminarControladorPro()){
+                            System.out.println("Programa Terminado");
+                        }
+                        else{
+                            System.out.println("Error: los procesadores no quedaron libres");
+                        }
+                    }
+                    else{
+                        System.out.println("Error: la memoria no quedo libre");
+                    }
+                }
+                else{
+                    System.out.println("Error: el almacenamiento no quedo libre");
+                }
+            }
+            else{
+                System.out.println("Error: la zona de espera no quedo vacia");
+            }
+        }
+        else{
+            System.out.println("Error: el buzon de entrada no quedo vacio");
+        }
+
     }
 }

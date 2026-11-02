@@ -14,10 +14,11 @@ public class BuzonEntrada {
         this.capacidadBuzonEntrada = capacidadBuzonEntrada;
     }
 
-    public synchronized void addSolicitud(Solicitud solicitud){
+    public synchronized void addSolicitud(Solicitud solicitud, String idUsuario){
 
         while (solicitudes.size() == capacidadBuzonEntrada) {
             try {
+                System.out.println("["+idUsuario+"]: Buzón lleno, a dormir");
                 wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -47,28 +48,8 @@ public class BuzonEntrada {
         usuariosActivos--;
     }
 
-
-    public int getCapacidadBuzonEntrada() {
-        return capacidadBuzonEntrada;
-    }
-
-    public void setCapacidadBuzonEntrada(int capacidadBuzonEntrada) {
-        this.capacidadBuzonEntrada = capacidadBuzonEntrada;
-    }
-
     public synchronized int getUsuariosActivos() {
         return usuariosActivos;
     }
 
-    public void setUsuariosActivos(int usuariosActivos) {
-        this.usuariosActivos = usuariosActivos;
-    }
-
-    public synchronized ArrayList<Solicitud> getSolicitudes() {
-        return solicitudes;
-    }
-
-    public void setSolicitudes(ArrayList<Solicitud> solicitudes) {
-        this.solicitudes = solicitudes;
-    }
 }

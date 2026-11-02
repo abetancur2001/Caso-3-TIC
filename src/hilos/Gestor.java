@@ -34,20 +34,30 @@ public class Gestor extends Thread{
         while(buzonAsignado.getUsuariosActivos() != 0 || !buzonAsignado.vacio()){
 
             if (zonaAsignada.superaUmbral()){
-
+                try {
+                    System.out.println("["+idGestor+"]: Se superó el umbral, a dormir");
+                    zonaAsignada.dormirGestor();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             Solicitud soli = buzonAsignado.retirarSolicitud();
 
             if (soli != null){
-                MV mv = new MV(contadorMVs.getIdMVs(), soli.getProcesadoresPedidos(), soli.getMemoriaPedida(), soli.getAlmacenamientoPedido(),zonaAsignada, controladorProcesadores, controladorMemoria, controladorAlmacenamiento);
+                System.out.println("["+idGestor+"]: Creando MV");
+                MV mv = new MV(contadorMVs.getIdMVs(), soli.getProcesadoresPedidos(), soli.getMemoriaPedida(), soli.getAlmacenamientoPedido(),zonaAsignada, controladorProcesadores, controladorMemoria, controladorAlmacenamiento, contadorMVs);
                 mv.start();
             }
             else{
+                System.out.println("["+idGestor+"]: No hay solicitudes");
                 Thread.yield();
             }
 
         }
+
+        System.out.println("["+idGestor+"]: No hay usuarios activos y el buzón está vacio, trabajo terminado");
+
 
     }
 
